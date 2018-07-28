@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="cacheEnabled" value="true"/>
+        <!--<setting name="logImpl" value="STDOUT_LOGGING" />-->
+    </settings>
+
+    <typeHandlers>
+        <typeHandler handler="com.peaceful.config.center.dao.handler.DomainTypeHandler"
+                     javaType="com.peaceful.config.center.dao.handler.DomainType"/>
+        <typeHandler handler="com.peaceful.config.center.dao.handler.EventTypeHandler"
+                     javaType="com.peaceful.config.center.dao.handler.EventType"/>
+        <typeHandler handler="com.peaceful.config.center.dao.handler.PropertyTypeHandler"
+                     javaType="com.peaceful.config.center.dao.handler.PropertyType"/>
+    </typeHandlers>
+</configuration>

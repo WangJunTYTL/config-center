@@ -1,0 +1,27 @@
+<div class="animated fadeInDown">
+    <p>目录位置:$!{category.name} | </p>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <td>键</td>
+            <td>值</td>
+            <td>说明</td>
+        </tr>
+        </thead>
+        <tbody>
+            #foreach($property in $propertyValueList)
+            <tr>
+                <td>
+                    <a href="javascript:void(0)" cid="$!category.id" pid="$!property.id" desc="$!property.description" v="$!property.value" class="updatePropertyValue">$property.name</a>
+                </td>
+                <td>$property.value</td>
+                <td>$property.description</td>
+            </tr>
+            #end
+        </tbody>
+    </table>
+</div>
+
+
+
+

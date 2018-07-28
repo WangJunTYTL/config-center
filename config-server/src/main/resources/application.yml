@@ -1,0 +1,7 @@
+server:
+  port: 8787
+
+db:
+  url:  jdbc:mysql://127.0.0.1:3306/config_center
+  user: root
+  password: 110
