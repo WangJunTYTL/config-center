@@ -1,7 +1,7 @@
-package com.peaceful.config.center.dao.handler;
+package com.peaceful.config.center.dao.enumhandler;
 
 /**
- * Created by wang on 2018/7/23.
+ * Created by Jun on 2018/7/23.
  */
 public enum DomainType {
 

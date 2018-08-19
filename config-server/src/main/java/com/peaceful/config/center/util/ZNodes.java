@@ -9,7 +9,7 @@ import com.peaceful.config.center.domain.Category;
  *
  * 构造ZTree需要的数据结构
  *
- * Created by wang on 2018/7/20.
+ * Created by Jun on 2018/7/20.
  */
 public class ZNodes {
 
@@ -23,6 +23,7 @@ public class ZNodes {
         node.put("name", category.getName());
         node.put("open", true);
         node.put("id", category.getId());
+        node.put("click", "queryCategoryProperties(" + category.getId() + ")");
         node.put("icon", "/plugin/zTree_v3/css/zTreeStyle/img/diy/1_open.png");
         render(category, node);
         root.add(node);

@@ -1,9 +1,9 @@
 package com.peaceful.config.center.service;
 
 /**
- * Created by wang on 2018/7/20.
+ * Created by Jun on 2018/7/20.
  */
-public enum  CategoryServiceCode {
+public enum CategoryReturnCode {
     CATEGORY_IS_NOT_EXIST,
     PROPERTY_IS_NOT_EXIST,
     PARENT_CATEGORY_IS_NOT_EXIST,

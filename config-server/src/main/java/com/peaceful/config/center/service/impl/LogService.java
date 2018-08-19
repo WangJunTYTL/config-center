@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Created by wang on 2018/7/23.
+ * Created by Jun on 2018/7/23.
  */
 @Service
 public class LogService {

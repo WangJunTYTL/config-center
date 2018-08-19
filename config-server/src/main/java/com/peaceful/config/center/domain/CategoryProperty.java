@@ -3,7 +3,7 @@ package com.peaceful.config.center.domain;
 import java.io.Serializable;
 
 /**
- * Created by wang on 2017/4/15.
+ * Created by Jun on 2017/4/15.
  */
 public class CategoryProperty implements Serializable {
 

@@ -11,7 +11,7 @@ import java.io.StringWriter;
 import java.util.Map;
 
 /**
- * Created by wang on 2018/7/20.
+ * Created by Jun on 2018/7/20.
  */
 public class WebResponse {
 

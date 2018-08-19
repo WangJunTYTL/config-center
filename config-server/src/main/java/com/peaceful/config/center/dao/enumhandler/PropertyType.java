@@ -1,7 +1,7 @@
-package com.peaceful.config.center.dao.handler;
+package com.peaceful.config.center.dao.enumhandler;
 
 /**
- * Created by wang on 2018/7/20.
+ * Created by Jun on 2018/7/20.
  */
 public enum PropertyType {
 

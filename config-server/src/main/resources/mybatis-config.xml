@@ -9,11 +9,11 @@
     </settings>
 
     <typeHandlers>
-        <typeHandler handler="com.peaceful.config.center.dao.handler.DomainTypeHandler"
-                     javaType="com.peaceful.config.center.dao.handler.DomainType"/>
-        <typeHandler handler="com.peaceful.config.center.dao.handler.EventTypeHandler"
-                     javaType="com.peaceful.config.center.dao.handler.EventType"/>
-        <typeHandler handler="com.peaceful.config.center.dao.handler.PropertyTypeHandler"
-                     javaType="com.peaceful.config.center.dao.handler.PropertyType"/>
+        <typeHandler handler="com.peaceful.config.center.dao.enumhandler.DomainTypeHandler"
+                     javaType="com.peaceful.config.center.dao.enumhandler.DomainType"/>
+        <typeHandler handler="com.peaceful.config.center.dao.enumhandler.EventTypeHandler"
+                     javaType="com.peaceful.config.center.dao.enumhandler.EventType"/>
+        <typeHandler handler="com.peaceful.config.center.dao.enumhandler.PropertyTypeHandler"
+                     javaType="com.peaceful.config.center.dao.enumhandler.PropertyType"/>
     </typeHandlers>
 </configuration>

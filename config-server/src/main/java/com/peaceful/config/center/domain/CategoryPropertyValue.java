@@ -3,11 +3,12 @@ package com.peaceful.config.center.domain;
 import java.io.Serializable;
 
 /**
- * Created by wang on 2017/4/15.
+ * Created by Jun on 2017/4/15.
  */
 public class CategoryPropertyValue implements Serializable {
 
     private long id;
+    private String key;
     private long categoryId;
     private long propertyId;
     private String value;
@@ -19,6 +20,14 @@ public class CategoryPropertyValue implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public long getCategoryId() {

@@ -801,7 +801,7 @@
                 return r;
             }
         },
-        //method of event handler
+        //method of event enumhandler
         handler = {
             onSwitchNode: function (event, node) {
                 var setting = data.getSetting(event.data.treeId);

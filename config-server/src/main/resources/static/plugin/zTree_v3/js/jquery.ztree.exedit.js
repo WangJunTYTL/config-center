@@ -254,7 +254,7 @@
 	_event = {
 
 	},
-	//method of event handler
+	//method of event enumhandler
 	_handler = {
 		onHoverOverNode: function(event, node) {
 			var setting = data.getSetting(event.data.treeId),

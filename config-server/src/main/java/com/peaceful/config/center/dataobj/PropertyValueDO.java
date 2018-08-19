@@ -3,7 +3,7 @@ package com.peaceful.config.center.dataobj;
 import com.peaceful.config.center.domain.Property;
 
 /**
- * Created by wang on 2018/7/20.
+ * Created by Jun on 2018/7/20.
  */
 public class PropertyValueDO extends Property {
 

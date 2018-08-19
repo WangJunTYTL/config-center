@@ -3,7 +3,7 @@ package com.peaceful.config.center.dataobj;
 import lombok.Data;
 
 /**
- * Created by wang on 2018/7/23.
+ * Created by Jun on 2018/7/23.
  */
 @Data
 public class CategoryPropertyDO {

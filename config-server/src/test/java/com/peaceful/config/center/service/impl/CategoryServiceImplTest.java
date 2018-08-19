@@ -4,7 +4,8 @@ import com.peaceful.config.center.domain.Category;
 import com.peaceful.config.center.domain.CategoryPropertyValue;
 import com.peaceful.config.center.domain.Property;
 import com.peaceful.config.center.service.CategoryService;
-import com.peaceful.config.center.dao.handler.PropertyType;
+import com.peaceful.config.center.dao.enumhandler.PropertyType;
+import com.peaceful.config.center.service.CategoryException;
 
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * Created by wang on 2018/7/20.
+ * Created by Jun on 2018/7/20.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -73,6 +74,28 @@ public class CategoryServiceImplTest {
     }
 
     @org.junit.Test
+    public void deleteCategory() {
+        for (int i=10;i<200;i++) {
+            try {
+                categoryService.deleteCategory("c1n" + i);
+            }catch (CategoryException e){
+                // ignore
+            }
+        }
+    }
+
+    @org.junit.Test
+    public void deleteProperty() {
+        for (int i=10;i<200;i++) {
+            try {
+                categoryService.deleteProperty(4,"foo"+i);
+            }catch (CategoryException e){
+                // ignore
+            }
+        }
+    }
+
+    @org.junit.Test
     public void insertProperty() {
         for (int i=0;i<100;i++) {
             Property property = new Property();
@@ -80,7 +103,7 @@ public class CategoryServiceImplTest {
             property.setDescription("测试属性描述");
             property.setName("foo"+i);
             property.setType(PropertyType.INPUT.getCode());
-            categoryService.insertProperty("c1",property);
+//            categoryService.insertProperty("c1",property);
         }
 
 

@@ -328,7 +328,7 @@
 	_event = {
 
 	},
-	//method of event handler
+	//method of event enumhandler
 	_handler = {
 		onCheckNode: function (event, node) {
 			if (node.chkDisabled === true) return false;

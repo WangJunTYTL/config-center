@@ -1,4 +1,4 @@
-package com.peaceful.config.center.dao.handler;
+package com.peaceful.config.center.dao.enumhandler;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by wang on 2018/7/24.
+ * Created by Jun on 2018/7/24.
  */
 public class DomainTypeHandler extends BaseTypeHandler<DomainType> {
 

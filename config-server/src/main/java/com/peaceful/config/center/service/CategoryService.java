@@ -10,10 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by wang on 2017/4/15.
+ * Created by Jun on 2017/4/15.
  */
 public interface CategoryService {
-
 
     /**
      * 插入类目
@@ -21,7 +20,12 @@ public interface CategoryService {
     void insertCategory(Category category);
 
     /**
-     * 查询类目信息 通过name
+     * 删除类目  同时会删除与之关联的属性、映射关系、类目属性值
+     */
+    boolean deleteCategory(String name);
+
+    /**
+     * 查询类目信息 category name是唯一的
      */
     Category getCategoryByName(String name);
 
@@ -31,29 +35,30 @@ public interface CategoryService {
     Category getCategoryById(long id);
 
     /**
-     * 获取类目属性列表
-     */
-    List<CategoryProperty> getCategoryPropertyList(String categoryName);
-
-    /**
      * 查询属性信息
      */
     Property getPropertyById(long id);
 
     /**
-     * 插入属性
+     * 通过名称查询信息 在某个category下关联的属性名称是唯一的
      */
-
-    long insertProperty(String categoryName, Property property);
-
+    Property getPropertyByName(long categoryId, String propertyName);
 
     /**
-     * 插入类目属性值
+     * 插入属性
      */
-    void insertCategoryPropertyValue(String categoryName, Map<String, String> keyValue);
+    long insertProperty(long categoryId, Property property);
+
+    /**
+     * 删除属性 同时会删除 类目关联关系、类目属性值
+     */
+    long deleteProperty(long categoryId, String propertyName);
+
+    String getCategoryPropertyValue(long categoryId,long propertyId);
+
+    String getCategoryPropertyValue(long categoryId,String key,String propertyName);
 
     void updateCategoryPropertyValue(long categoryId, long propertyId, String value);
-
 
     /**
      * 查询指定类目的属性信息
@@ -61,23 +66,9 @@ public interface CategoryService {
     List<CategoryPropertyValue> getCategoryPropertyValue(long categoryId);
 
     /**
-     * 查询指定类目属性的属性值
-     *
-     * @return 如果没有类目或者属性, 会抛出CategoryServiceException, 如果商户没有这个属性的属性值, 会返回null
-     */
-    CategoryPropertyValue getSingleCategoryPropertyValue(long categoryId, String propertyName);
-
-    /**
      * 通过属性名字更新描述
      */
     boolean updateDescription(long propertyId, String description);
 
-    /**
-     * 通过属性Id更新默认值
-     *
-     * @param propertyName 属性Id
-     * @param defaultValue 默认值
-     */
-    boolean updateDefaultValueByName(String propertyName, String defaultValue);
 
 }

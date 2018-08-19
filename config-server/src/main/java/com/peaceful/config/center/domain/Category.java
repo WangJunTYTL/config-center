@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by wang on 2017/4/15.
+ * Created by Jun on 2017/4/15.
  */
 public class Category implements Serializable {
 

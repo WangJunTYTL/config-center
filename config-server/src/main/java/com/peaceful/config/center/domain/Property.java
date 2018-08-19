@@ -3,7 +3,7 @@ package com.peaceful.config.center.domain;
 import java.io.Serializable;
 
 /**
- * Created by wang on 2017/4/15.
+ * Created by Jun on 2017/4/15.
  */
 public class Property implements Serializable {
 
@@ -61,4 +61,5 @@ public class Property implements Serializable {
     public void setDefaultValue(String defaultValue) {
         this.defaultValue = defaultValue;
     }
+
 }

@@ -802,7 +802,7 @@
                 return r;
             }
         },
-        //method of event handler
+        //method of event enumhandler
         handler = {
             onSwitchNode: function (event, node) {
                 var setting = data.getSetting(event.data.treeId);
@@ -2314,7 +2314,7 @@
 	_event = {
 
 	},
-	//method of event handler
+	//method of event enumhandler
 	_handler = {
 		onCheckNode: function (event, node) {
 			if (node.chkDisabled === true) return false;
@@ -2884,7 +2884,7 @@
 	_event = {
 
 	},
-	//method of event handler
+	//method of event enumhandler
 	_handler = {
 		onHoverOverNode: function(event, node) {
 			var setting = data.getSetting(event.data.treeId),

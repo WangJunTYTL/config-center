@@ -5,7 +5,7 @@ import com.peaceful.config.center.domain.LogEvent;
 import org.apache.ibatis.annotations.Insert;
 
 /**
- * Created by wang on 2018/7/23.
+ * Created by Jun on 2018/7/23.
  */
 public interface CategoryLogEventDao {
 

@@ -4,6 +4,7 @@ package com.peaceful.config.center.dao;
 import com.peaceful.config.center.domain.CategoryProperty;
 import com.peaceful.config.center.domain.Property;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +14,7 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 /**
- * Created by wang on 2017/4/15.
+ * Created by Jun on 2017/4/15.
  */
 public interface CategoryPropertyDao {
 
@@ -39,4 +40,10 @@ public interface CategoryPropertyDao {
 
     @Update("update category_property set default_value = #{defaultValue},mod_time = now() where name = #{name}")
     int updatePropertyDefaultValueByName(@Param("name") String name, @Param("defaultValue") String defaultValue);
+
+    @Delete("delete from category_property where id = #{id}")
+    void deleteById(@Param("id") long propertyId);
+
+    @Delete("delete from category_property_map where property_id = #{id}")
+    void deleteCategoryPropertyMap(@Param("id") long propertyId);
 }

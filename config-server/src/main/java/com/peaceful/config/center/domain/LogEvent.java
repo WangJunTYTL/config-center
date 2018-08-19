@@ -1,12 +1,12 @@
 package com.peaceful.config.center.domain;
 
-import com.peaceful.config.center.dao.handler.EventType;
-import com.peaceful.config.center.dao.handler.DomainType;
+import com.peaceful.config.center.dao.enumhandler.EventType;
+import com.peaceful.config.center.dao.enumhandler.DomainType;
 
 import lombok.Data;
 
 /**
- * Created by wang on 2018/7/23.
+ * Created by Jun on 2018/7/23.
  */
 @Data
 public class LogEvent {

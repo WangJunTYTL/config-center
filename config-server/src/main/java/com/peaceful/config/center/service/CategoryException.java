@@ -3,26 +3,26 @@ package com.peaceful.config.center.service;
 
 
 /**
- * Created by wang on 2017/4/18.
+ * Created by Jun on 2017/4/18.
  */
-public class CategoryServiceException extends RuntimeException {
+public class CategoryException extends RuntimeException {
 
-    private final transient CategoryServiceCode resultCode;
+    private final transient CategoryReturnCode resultCode;
 
     private final String errMsg;
 
-    public CategoryServiceException(CategoryServiceCode resultCode) {
+    public CategoryException(CategoryReturnCode resultCode) {
         this.resultCode = resultCode;
         errMsg = null;
     }
 
-    public CategoryServiceException(CategoryServiceCode resultCode, String msg) {
+    public CategoryException(CategoryReturnCode resultCode, String msg) {
         super(msg);
         this.errMsg = msg;
         this.resultCode = resultCode;
     }
 
-    public CategoryServiceException(CategoryServiceCode resultCode, Exception e) {
+    public CategoryException(CategoryReturnCode resultCode, Exception e) {
         this.errMsg = e.getMessage();
         this.resultCode = resultCode;
     }
@@ -31,7 +31,7 @@ public class CategoryServiceException extends RuntimeException {
         return errMsg;
     }
 
-    public CategoryServiceCode getResultCode() {
+    public CategoryReturnCode getResultCode() {
         return resultCode;
     }
 

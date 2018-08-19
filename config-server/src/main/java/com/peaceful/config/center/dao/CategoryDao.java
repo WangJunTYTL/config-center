@@ -3,6 +3,7 @@ package com.peaceful.config.center.dao;
 
 import com.peaceful.config.center.domain.Category;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
@@ -11,7 +12,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /**
- * Created by wang on 2017/4/15.
+ * Created by Jun on 2017/4/15.
  */
 public interface CategoryDao {
 
@@ -28,5 +29,7 @@ public interface CategoryDao {
     @Select("select * from category where `parent_category_id` = #{id}")
     List<Category> getCategoryByParentId(long id);
 
+    @Delete("delete from category where `name` = #{name}")
+    int deleteByName(@Param("name")String name);
 
 }
