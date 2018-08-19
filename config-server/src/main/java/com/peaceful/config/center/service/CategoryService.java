@@ -58,6 +58,8 @@ public interface CategoryService {
 
     String getCategoryPropertyValue(long categoryId,String key,String propertyName);
 
+    void insertPropertyAndValue(long category,Property property,String value);
+
     void updateCategoryPropertyValue(long categoryId, long propertyId, String value);
 
     /**

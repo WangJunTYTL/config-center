@@ -121,7 +121,7 @@ public class CategoryServiceImpl implements CategoryService {
         return true;
     }
 
-    private void  deleteCategory(Category category){
+    private void deleteCategory(Category category) {
         List<CategoryProperty> categoryPropertyList = categoryPropertyMapper.selectCategoryPropertyList(category.getId());
         for (CategoryProperty categoryProperty : categoryPropertyList) {
             long propertyId = categoryProperty.getPropertyId();
@@ -131,10 +131,10 @@ public class CategoryServiceImpl implements CategoryService {
         }
         categoryMapper.deleteByName(category.getName()); // 最后删除类目本身
         List<Category> categoryList = category.getChildrenCategoryList();
-        if (categoryList == null ||  categoryList.isEmpty()){
+        if (categoryList == null || categoryList.isEmpty()) {
             return;
         }
-        for (Category del:categoryList){
+        for (Category del : categoryList) {
             deleteCategory(del);
         }
     }
@@ -255,6 +255,13 @@ public class CategoryServiceImpl implements CategoryService {
         return null;
     }
 
+    @Override
+    @Transactional
+    public void insertPropertyAndValue(long categoryId, Property property, String value) {
+        insertProperty(categoryId, property);
+        updateCategoryPropertyValue(categoryId, property.getId(), value);
+    }
+
 
     @Override
     @Transactional
@@ -269,7 +276,7 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         CategoryPropertyValue propertyValue = new CategoryPropertyValue();
-        propertyValue.setKey(property.getName());// 如果不指定key名称，默认取属性的名称
+        propertyValue.setObjectKey(property.getName());// 如果不指定key名称，默认取属性的名称
         propertyValue.setCategoryId(category.getId());
         propertyValue.setPropertyId(property.getId());
         propertyValue.setValue(value);
@@ -280,7 +287,7 @@ public class CategoryServiceImpl implements CategoryService {
         snapshotMap.put("value", value);
 
         String snapshotStr = JSON.toJSONString(snapshotMap);
-        propertyValue.setSnapshot(snapshotStr);
+        propertyValue.setComment(snapshotStr);
         categoryPropertyValueMapper.insertCategoryPropertyValue(propertyValue);
 
         LogEvent logEvent = LogEvent.buildLog(DomainType.VALUE, EventType.VALUE_UPDATE, propertyValue.getId());

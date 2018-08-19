@@ -20,6 +20,9 @@ public class ServerIO {
         this.serverAddress = serverAddress;
         NameValuePair c = new BasicNameValuePair("cname", categoryName);
         ServerResponse response = request("get-categoryId", c);
+        if (response.getCode() == 500) {
+            throw new KVConfigException("init KVConfig instance fail, categoryName[" + categoryName + "] is not exist");
+        }
         categoryId = String.valueOf(response.getData());
     }
 

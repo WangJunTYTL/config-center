@@ -1,7 +1,5 @@
 package com.peaceful.config.center.client;
 
-import org.junit.Assert;
-
 import java.io.IOException;
 
 /**
@@ -13,7 +11,7 @@ public class KVConfigTest {
 
     @org.junit.Before
     public void setUp() throws Exception {
-        kvConfig = new KVConfig("c1", "http://127.0.0.1:8787");
+        kvConfig = new KVConfig("Test02", "http://127.0.0.1:8787");
     }
 
     @org.junit.Test

@@ -8,11 +8,11 @@ import java.io.Serializable;
 public class CategoryPropertyValue implements Serializable {
 
     private long id;
-    private String key;
+    private String objectKey;
     private long categoryId;
     private long propertyId;
     private String value;
-    private String snapshot;
+    private String comment;
 
     public long getId() {
         return id;
@@ -22,12 +22,12 @@ public class CategoryPropertyValue implements Serializable {
         this.id = id;
     }
 
-    public String getKey() {
-        return key;
+    public String getObjectKey() {
+        return objectKey;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setObjectKey(String objectKey) {
+        this.objectKey = objectKey;
     }
 
     public long getCategoryId() {
@@ -54,11 +54,11 @@ public class CategoryPropertyValue implements Serializable {
         this.value = value;
     }
 
-    public String getSnapshot() {
-        return snapshot;
+    public String getComment() {
+        return comment;
     }
 
-    public void setSnapshot(String snapshot) {
-        this.snapshot = snapshot;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

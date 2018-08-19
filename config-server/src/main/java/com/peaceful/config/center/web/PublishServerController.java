@@ -2,7 +2,6 @@ package com.peaceful.config.center.web;
 
 import com.peaceful.config.center.domain.Category;
 import com.peaceful.config.center.domain.Property;
-import com.peaceful.config.center.service.CategoryReturnCode;
 import com.peaceful.config.center.service.CategoryService;
 import com.peaceful.config.center.util.WebResponse;
 
@@ -25,6 +24,9 @@ public class PublishServerController {
     @RequestMapping("get-categoryId")
     public Object getCategoryId(String cname) {
         Category category = categoryService.getCategoryByName(cname);
+        if (category == null) {
+            return WebResponse.JSON(500, cname + " is not exist");
+        }
         return WebResponse.JsonData(200, "OK", category.getId());
     }
 

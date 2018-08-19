@@ -139,8 +139,7 @@ public class ConfigCenterController {
             property.setDescription(desc);
             property.setType(PropertyType.INPUT.getCode());
             property.setName(key);
-            long propertyId = categoryService.insertProperty(categoryId, property);
-            categoryService.updateCategoryPropertyValue(categoryId, propertyId, value);
+            categoryService.insertPropertyAndValue(categoryId, property, value);
             return WebResponse.JSON(200, "OK");
         } catch (CategoryException e) {
             return WebResponse.JSON(500, e.getMessage());
