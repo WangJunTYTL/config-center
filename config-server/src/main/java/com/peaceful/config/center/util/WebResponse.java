@@ -38,4 +38,12 @@ public class WebResponse {
         data.put("message", message);
         return data;
     }
+
+    public static Object JsonData(int code, String message, Object data) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("code", code);
+        jsonObject.put("message", message);
+        jsonObject.put("data", data);
+        return jsonObject;
+    }
 }

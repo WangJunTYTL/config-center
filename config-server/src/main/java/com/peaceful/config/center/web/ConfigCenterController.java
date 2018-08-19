@@ -43,7 +43,6 @@ public class ConfigCenterController {
 
     @RequestMapping("index")
     public String index(HttpServletRequest request) {
-
         Category category = categoryService.getCategoryByName("root");
         String zNodesJson = ZNodes.buildZNodesJson(category);
 
