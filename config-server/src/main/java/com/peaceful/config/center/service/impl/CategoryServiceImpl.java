@@ -4,12 +4,12 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 
 import com.alibaba.fastjson.JSON;
-import com.peaceful.config.center.dao.CategoryDao;
-import com.peaceful.config.center.dao.CategoryPropertyDao;
-import com.peaceful.config.center.dao.CategoryPropertyValueDao;
-import com.peaceful.config.center.dao.enumhandler.DomainType;
-import com.peaceful.config.center.dao.enumhandler.EventType;
-import com.peaceful.config.center.dao.enumhandler.PropertyType;
+import com.peaceful.config.center.mapper.CategoryMapper;
+import com.peaceful.config.center.mapper.CategoryPropertyMapper;
+import com.peaceful.config.center.mapper.CategoryPropertyValueMapper;
+import com.peaceful.config.center.mapper.enumhandler.DomainType;
+import com.peaceful.config.center.mapper.enumhandler.EventType;
+import com.peaceful.config.center.mapper.enumhandler.PropertyType;
 import com.peaceful.config.center.domain.Category;
 import com.peaceful.config.center.domain.CategoryProperty;
 import com.peaceful.config.center.domain.CategoryPropertyValue;
@@ -37,11 +37,11 @@ import java.util.Map;
 public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
-    private CategoryDao categoryDao;
+    private CategoryMapper categoryMapper;
     @Autowired
-    private CategoryPropertyDao categoryPropertyDao;
+    private CategoryPropertyMapper categoryPropertyMapper;
     @Autowired
-    private CategoryPropertyValueDao categoryPropertyValueDao;
+    private CategoryPropertyValueMapper categoryPropertyValueMapper;
     @Autowired
     private LogService logService;
 
@@ -52,12 +52,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Property getPropertyById(long id) {
-        return categoryPropertyDao.getPropertyById(id);
+        return categoryPropertyMapper.getPropertyById(id);
     }
 
     @Override
     public Property getPropertyByName(long categoryId, String propertyName) {
-        List<CategoryProperty> categoryPropertyList = categoryPropertyDao.selectCategoryPropertyList(categoryId);
+        List<CategoryProperty> categoryPropertyList = categoryPropertyMapper.selectCategoryPropertyList(categoryId);
         Property property = null;
         for (CategoryProperty categoryProperty : categoryPropertyList) {
             Property found = this.getPropertyById(categoryProperty.getPropertyId());
@@ -71,12 +71,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryPropertyValue> getCategoryPropertyValue(long categoryId) {
-        Category category = categoryDao.getCategoryById(categoryId);
+        Category category = categoryMapper.getCategoryById(categoryId);
         if (category == null) {
             throw new CategoryException(CategoryReturnCode.CATEGORY_IS_NOT_EXIST);
         }
         // 查询category下已设置的value列表
-        List<CategoryPropertyValue> categoryPropertyValueList = categoryPropertyValueDao.selectValueList(category.getId());
+        List<CategoryPropertyValue> categoryPropertyValueList = categoryPropertyValueMapper.selectValueList(category.getId());
 
         return categoryPropertyValueList;
     }
@@ -90,7 +90,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category parent = category.getParentCategory();
         // 如果填了父类目 需要校验父类目的合法性
         if (parent != null && StringUtils.isNotBlank(parent.getName())) {
-            parent = categoryDao.getCategoryByName(parent.getName());
+            parent = categoryMapper.getCategoryByName(parent.getName());
             if (parent == null) {
                 throw new CategoryException(CategoryReturnCode.PARENT_CATEGORY_IS_NOT_EXIST, category.getName() + "父类目不存在");
             }
@@ -101,11 +101,11 @@ public class CategoryServiceImpl implements CategoryService {
             category.setParentCategory(topCategory);
         }
 
-        Category old = categoryDao.getCategoryByName(category.getName());
+        Category old = categoryMapper.getCategoryByName(category.getName());
         if (old != null) {
             throw new CategoryException(CategoryReturnCode.CATEGORY_IS_EXIST, category.getName() + "类目已存在");
         }
-        categoryDao.insertCategory(category);
+        categoryMapper.insertCategory(category);
         LogEvent logEvent = LogEvent.buildLog(DomainType.CATEGORY, EventType.CATEGORY_UPDATE, category.getId());
         logService.log(logEvent);
     }
@@ -122,14 +122,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     private void  deleteCategory(Category category){
-        List<CategoryProperty> categoryPropertyList = categoryPropertyDao.selectCategoryPropertyList(category.getId());
+        List<CategoryProperty> categoryPropertyList = categoryPropertyMapper.selectCategoryPropertyList(category.getId());
         for (CategoryProperty categoryProperty : categoryPropertyList) {
             long propertyId = categoryProperty.getPropertyId();
-            categoryPropertyValueDao.deleteByPropertyId(propertyId); // 先删除与该属性相关的值
-            categoryPropertyDao.deleteById(propertyId); // 删除属性对象
-            categoryPropertyDao.deleteCategoryPropertyMap(propertyId); // 删除关联关系
+            categoryPropertyValueMapper.deleteByPropertyId(propertyId); // 先删除与该属性相关的值
+            categoryPropertyMapper.deleteById(propertyId); // 删除属性对象
+            categoryPropertyMapper.deleteCategoryPropertyMap(propertyId); // 删除关联关系
         }
-        categoryDao.deleteByName(category.getName()); // 最后删除类目本身
+        categoryMapper.deleteByName(category.getName()); // 最后删除类目本身
         List<Category> categoryList = category.getChildrenCategoryList();
         if (categoryList == null ||  categoryList.isEmpty()){
             return;
@@ -143,7 +143,7 @@ public class CategoryServiceImpl implements CategoryService {
     public Category getCategoryByName(String name) {
         Preconditions.checkArgument(StringUtils.isNotBlank(name), CATEGORY_NAME_ILLEGAL);
 
-        Category category = categoryDao.getCategoryByName(name);
+        Category category = categoryMapper.getCategoryByName(name);
         if (category == null) {
             return null;
         }
@@ -153,7 +153,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category getCategoryById(long id) {
-        Category category = categoryDao.getCategoryById(id);
+        Category category = categoryMapper.getCategoryById(id);
         if (category == null) {
             return null;
         } else {
@@ -166,7 +166,7 @@ public class CategoryServiceImpl implements CategoryService {
         if (parent == null) {
             return;
         }
-        List<Category> categoryList = categoryDao.getCategoryByParentId(parent.getId());
+        List<Category> categoryList = categoryMapper.getCategoryByParentId(parent.getId());
         if (categoryList == null || categoryList.isEmpty()) {
             return;
         }
@@ -191,7 +191,7 @@ public class CategoryServiceImpl implements CategoryService {
             Preconditions.checkArgument(StringUtils.isNotBlank(property.getOption()), "property optionValue is illegal!");
         }
 
-        Category category = categoryDao.getCategoryById(categoryId);
+        Category category = categoryMapper.getCategoryById(categoryId);
         if (category == null) {
             throw new CategoryException(CategoryReturnCode.CATEGORY_IS_NOT_EXIST);
         }
@@ -215,12 +215,12 @@ public class CategoryServiceImpl implements CategoryService {
         if (StringUtils.isNotBlank(property.getOption())) {
             this.checkPropertyValueInOption(property, property.getDefaultValue());
         }
-        categoryPropertyDao.insertProperty(property);
+        categoryPropertyMapper.insertProperty(property);
         long propertyId = property.getId();
         CategoryProperty categoryProperty = new CategoryProperty();
         categoryProperty.setCategoryId(category.getId());
         categoryProperty.setPropertyId(propertyId);
-        categoryPropertyDao.insertCategoryProperty(categoryProperty);
+        categoryPropertyMapper.insertCategoryProperty(categoryProperty);
 
         LogEvent logEvent = LogEvent.buildLog(DomainType.PROPERTY, EventType.PROPERTY_UPDATE, propertyId);
         logService.log(logEvent);
@@ -240,9 +240,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public String getCategoryPropertyValue(long categoryId, long propertyId) {
-        CategoryPropertyValue categoryPropertyValue = categoryPropertyValueDao.selectByCategoryIdAndPropertyId(categoryId, propertyId);
+        CategoryPropertyValue categoryPropertyValue = categoryPropertyValueMapper.selectByCategoryIdAndPropertyId(categoryId, propertyId);
         if (categoryPropertyValue == null) {
-            Property property = categoryPropertyDao.getPropertyById(propertyId);
+            Property property = categoryPropertyMapper.getPropertyById(propertyId);
             if (property != null) {
                 return property.getDefaultValue();
             }
@@ -259,11 +259,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional
     public void updateCategoryPropertyValue(long categoryId, long propertyId, String value) {
-        Category category = categoryDao.getCategoryById(categoryId);
+        Category category = categoryMapper.getCategoryById(categoryId);
         if (category == null) {
             throw new CategoryException(CategoryReturnCode.CATEGORY_IS_NOT_EXIST, "类目不存在");
         }
-        Property property = categoryPropertyDao.getPropertyById(propertyId);
+        Property property = categoryPropertyMapper.getPropertyById(propertyId);
         if (property == null) {
             throw new CategoryException(CategoryReturnCode.PROPERTY_IS_NOT_EXIST, "属性不已存在");
         }
@@ -281,7 +281,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         String snapshotStr = JSON.toJSONString(snapshotMap);
         propertyValue.setSnapshot(snapshotStr);
-        categoryPropertyValueDao.insertCategoryPropertyValue(propertyValue);
+        categoryPropertyValueMapper.insertCategoryPropertyValue(propertyValue);
 
         LogEvent logEvent = LogEvent.buildLog(DomainType.VALUE, EventType.VALUE_UPDATE, propertyValue.getId());
         logService.log(logEvent);
@@ -290,9 +290,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     void deleteProperty(Property property) {
         long propertyId = property.getId();
-        categoryPropertyDao.deleteById(propertyId);
-        categoryPropertyDao.deleteCategoryPropertyMap(propertyId);
-        long rows = categoryPropertyValueDao.deleteByPropertyId(propertyId);
+        categoryPropertyMapper.deleteById(propertyId);
+        categoryPropertyMapper.deleteCategoryPropertyMap(propertyId);
+        long rows = categoryPropertyValueMapper.deleteByPropertyId(propertyId);
         logger.warn("删除属性:{}，附带删除{}条属性值", propertyId, rows);
     }
 
@@ -325,12 +325,12 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional(propagation = Propagation.REQUIRED)
     public boolean updateDescription(long propertyId, String description) {
         Preconditions.checkArgument(StringUtils.isNotBlank(description), "propertyName is illegal");
-        Property property = categoryPropertyDao.getPropertyById(propertyId);
+        Property property = categoryPropertyMapper.getPropertyById(propertyId);
         if (property == null) {
             logger.info("updateDescriptionByName error:未发现property");
             throw new CategoryException(CategoryReturnCode.PROPERTY_IS_NOT_EXIST);
         }
-        boolean updateRes = categoryPropertyDao.updatePropertyDescription(propertyId, description) > 0 ? true : false;
+        boolean updateRes = categoryPropertyMapper.updatePropertyDescription(propertyId, description) > 0 ? true : false;
 
         LogEvent logEvent = LogEvent.buildLog(DomainType.PROPERTY, EventType.PROPERTY_UPDATE, property.getId());
         logService.log(logEvent);

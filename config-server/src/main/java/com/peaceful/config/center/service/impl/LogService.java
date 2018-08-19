@@ -1,6 +1,6 @@
 package com.peaceful.config.center.service.impl;
 
-import com.peaceful.config.center.dao.CategoryLogEventDao;
+import com.peaceful.config.center.mapper.CategoryLogEventMapper;
 import com.peaceful.config.center.domain.LogEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class LogService {
 
     @Autowired
-    private CategoryLogEventDao logEventDao;
+    private CategoryLogEventMapper categoryLogEventMapper;
 
     @Transactional(propagation = Propagation.REQUIRED)
     public void log(LogEvent logEvent) {
         logEvent.validate();
-        logEventDao.insert(logEvent);
+        categoryLogEventMapper.insert(logEvent);
     }
 }

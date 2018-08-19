@@ -1,4 +1,4 @@
-package com.peaceful.config.center.dao;
+package com.peaceful.config.center.mapper;
 
 
 import com.peaceful.config.center.domain.Category;
@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Jun on 2017/4/15.
  */
-public interface CategoryDao {
+public interface CategoryMapper {
 
     @Insert("insert into category(`name`,`parent_category_id`,`description`,`add_time`) values( #{category.name},#{category.parentCategory.id},#{category.description},now())")
     @Options(useGeneratedKeys = true, keyProperty = "id")

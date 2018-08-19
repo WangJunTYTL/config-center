@@ -1,4 +1,4 @@
-package com.peaceful.config.center.dao.enumhandler;
+package com.peaceful.config.center.mapper.enumhandler;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;

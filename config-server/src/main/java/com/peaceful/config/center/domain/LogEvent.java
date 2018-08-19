@@ -1,7 +1,7 @@
 package com.peaceful.config.center.domain;
 
-import com.peaceful.config.center.dao.enumhandler.EventType;
-import com.peaceful.config.center.dao.enumhandler.DomainType;
+import com.peaceful.config.center.mapper.enumhandler.EventType;
+import com.peaceful.config.center.mapper.enumhandler.DomainType;
 
 import lombok.Data;
 

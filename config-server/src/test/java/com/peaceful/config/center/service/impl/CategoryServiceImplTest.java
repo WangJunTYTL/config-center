@@ -4,7 +4,7 @@ import com.peaceful.config.center.domain.Category;
 import com.peaceful.config.center.domain.CategoryPropertyValue;
 import com.peaceful.config.center.domain.Property;
 import com.peaceful.config.center.service.CategoryService;
-import com.peaceful.config.center.dao.enumhandler.PropertyType;
+import com.peaceful.config.center.mapper.enumhandler.PropertyType;
 import com.peaceful.config.center.service.CategoryException;
 
 import org.junit.runner.RunWith;

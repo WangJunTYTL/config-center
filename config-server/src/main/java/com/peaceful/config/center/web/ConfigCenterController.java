@@ -3,14 +3,13 @@ package com.peaceful.config.center.web;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import com.peaceful.config.center.dao.enumhandler.PropertyType;
+import com.peaceful.config.center.mapper.enumhandler.PropertyType;
 import com.peaceful.config.center.domain.Category;
 import com.peaceful.config.center.domain.CategoryPropertyValue;
 import com.peaceful.config.center.domain.Property;
 import com.peaceful.config.center.service.CategoryService;
 import com.peaceful.config.center.dataobj.PropertyValueDO;
 import com.peaceful.config.center.service.CategoryException;
-import com.peaceful.config.center.service.impl.KVFactory;
 import com.peaceful.config.center.util.WebResponse;
 import com.peaceful.config.center.util.ZNodes;
 

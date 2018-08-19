@@ -1,5 +1,7 @@
 package com.peaceful.config.center.client;
 
+import org.junit.Assert;
+
 import java.io.IOException;
 
 /**

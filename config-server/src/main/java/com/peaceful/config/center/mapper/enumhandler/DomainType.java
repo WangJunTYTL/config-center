@@ -1,4 +1,4 @@
-package com.peaceful.config.center.dao.enumhandler;
+package com.peaceful.config.center.mapper.enumhandler;
 
 /**
  * Created by Jun on 2018/7/23.

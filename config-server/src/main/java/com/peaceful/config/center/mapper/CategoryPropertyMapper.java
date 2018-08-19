@@ -1,4 +1,4 @@
-package com.peaceful.config.center.dao;
+package com.peaceful.config.center.mapper;
 
 
 import com.peaceful.config.center.domain.CategoryProperty;
@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Jun on 2017/4/15.
  */
-public interface CategoryPropertyDao {
+public interface CategoryPropertyMapper {
 
 
     @Insert("insert into category_property(`name`,`description`,`type`,`option`,`add_time`,`default_value`) values (#{name},#{description},#{type},#{option},now(),#{defaultValue})")
